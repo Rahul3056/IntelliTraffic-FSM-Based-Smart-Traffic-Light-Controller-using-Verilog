@@ -1,0 +1,38 @@
+`timescale 1ns / 1ps
+
+module traffic_light_tb;
+
+    reg clk;
+    reg reset;
+    wire ns_red, ns_yellow, ns_green;
+    wire ew_red, ew_yellow, ew_green;
+
+    traffic_light_controller uut (
+        .clk(clk),
+        .reset(reset),
+        .ns_red(ns_red), .ns_yellow(ns_yellow), .ns_green(ns_green),
+        .ew_red(ew_red), .ew_yellow(ew_yellow), .ew_green(ew_green)
+    );
+
+    // Clock generator (period = 10ns for simulation)
+    always #5 clk = ~clk;
+
+    initial begin
+        clk = 0;
+        reset = 1;
+        #20;
+        reset = 0;
+
+        // Run long enough to cover full state cycle multiple times
+        #300;
+        $finish;
+    end
+
+    initial begin
+        $display("Time\tState\tNS (R Y G)\tEW (R Y G)");
+        $monitor("%0t\t\t%b %b %b\t\t%b %b %b",
+            $time, ns_red, ns_yellow, ns_green,
+                    ew_red, ew_yellow, ew_green);
+    end
+
+endmodule
