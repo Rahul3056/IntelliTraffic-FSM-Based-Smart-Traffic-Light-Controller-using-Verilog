@@ -1,0 +1,2 @@
+# IntelliTraffic-FSM-Based-Smart-Traffic-Light-Controller-using-Verilog
+Designed and simulated a smart traffic light controller using Finite State Machine (FSM) principles in Verilog HDL, simulating realistic traffic behavior at a 4-way intersection. The controller dynamically manages light transitions for North-South and East-West directions with clearly separated signals for Red, Yellow, and Green lights..
